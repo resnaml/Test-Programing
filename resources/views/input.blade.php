@@ -247,6 +247,7 @@
         function Calucalte() {
             
             var sum = 0;
+            var amts = document.getElementsByName("qty[]");
             var amts = document.getElementsByName("total[]");
 
             for (let i = 0; i < amts.length; i++) {
@@ -262,6 +263,7 @@
             var Sub = parseFloat($('#sub-total').val()) || 0;
             var hasil = Sub - (diskon + ongkir);
             
+            document.getElementById('total-bayar').value = hasil.toFixed(2);
             document.getElementById('total-bayar').value = hasil.toFixed(2);
             });
         }

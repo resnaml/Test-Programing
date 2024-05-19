@@ -71,31 +71,28 @@ Route::post('/transaksi', function(Request $request){
         'total_bayar' => $request->total_bayar
     ]);
 
-    // dd(
-    //     $request->id_barang,
-    //     $request->quantity,
-    //     $request->harga,
-    //     $request->persen,
-    //     $request->diskon_persen,
-    //     $request->diskon_harga,
-    //     $request->total
-    // );
 
+        // $salesdt->id_barang = $request->id_barang;
+        // $salesdt->quantity =  $request->quantity;
+        // $salesdt->harga =  $request->harga;
+        // $salesdt->persen =  $request->persen;
+        // $salesdt->diskon_persen =  $request->diskon_persen;
+        // $salesdt->diskon_harga =  $request->diskon_harga;
+        // $salesdt->total =  $request->total;
 
-    // dd($data2);
-    // foreach ($variable as $key ) {
-    //     # code...
-    // }
-    SalesDet::createMany([
-        'sales_id' => $sales->id,
-        'barang_id' => $request->id_barang,
-        'harga_bandrol' => $request->harga,
-        'qty' => $request->quantity,
-        'diskon_pct' => $request->diskon_persen,
-        'diskon_nilai' => $request->diskon_harga,
-        'harga_diskon' => $request->total,
-        'total' => $request->total_bayar,
-    ]);
+    foreach ($request->id_barang as $key => $items ) {
+        $salesdt['barang_id'] = $request->id_barang[$key];
+        $salesdt['harga_bandrol'] = $request->harga[$key];
+        $salesdt['qty'] = $request->quantity[$key];
+        $salesdt['diskon_pct'] = $request->persen[$key];
+        $salesdt['diskon_nilai'] = $request->diskon_persen[$key];
+        $salesdt['harga_diskon'] = $request->diskon_harga[$key];
+        $salesdt['total'] = $request->total_bayar;
+        $salesdt['sales_id'] = $sales->id;
+        SalesDet::create($salesdt);
+    }
+    
+
 
     DB::commit();
 
