@@ -111,7 +111,7 @@
                     <div class="container fluid">
                         <div class="container">
                             <button type="submit" class="btn btn-success">Simpan</button>
-                            <a class="btn btn-warning">Batal</a>
+                            <a href="/daftar-transaksi" class="btn btn-warning">Batal</a>
                         </div>
                     </div>
 
