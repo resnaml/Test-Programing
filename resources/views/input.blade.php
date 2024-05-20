@@ -103,6 +103,11 @@
                                 <td colspan="8"><strong>Total Bayar</strong></td>
                                 <td><input type="number" readonly name="total_bayar" id="total-bayar" class="form-control"></td>
                             </tr>
+
+                            <tr>
+                                <td colspan="8"><strong>jumlah qty</strong></td>
+                                <td hidden><input type="number" name="jml_qty" readonly id="jml-qty" class="form-control"></td>
+                            </tr>
                             
                         </tfoot>
 
@@ -191,7 +196,7 @@
                                     '<td class="row-number"></td>' +
                                     '<td>' + productName + '</td>' +
                                     '<td hidden ><input type="number"  name="id_barang[]" value="'+productId+'" class="form-control"></td>' +
-                                    '<td><input type="number" id="quantity" name="quantity[]" class="form-control"></td>' +
+                                    '<td><input type="number" id="quantity" name="quantity[]" class="quantity form-control"></td>' +
                                     '<td><input type="number" name="harga[]" readonly value="'+ productPrice+'" class="form-control"></td>' +
                                     '<td><input type="number" name="persen[]" id="persen" maxlength="6" pattern="[0-9]*" class="form-control"></td>' +
                                     '<td><input type="number" name="diskon_persen[]" readonly class="form-control"></td>' +
@@ -220,6 +225,7 @@
         $(document).on('click', '.remove-product', function() {
             $(this).closest('tr').remove();
             Calucalte();
+            Qty();
             Reset();
         });
 
@@ -242,7 +248,17 @@
 
         var Total = document.getElementsByName("total[]")[index].value = total.toFixed(2);
         Calucalte();
+        Qty();
         });
+
+        function Qty() {
+        let total = 0;
+        $('.quantity').each(function() {
+            total += parseFloat($(this).val()) || 0;
+        });
+
+        document.getElementById('jml-qty').value = total;
+        }
 
         function Calucalte() {
             
@@ -264,7 +280,7 @@
             var hasil = Sub - (diskon + ongkir);
             
             document.getElementById('total-bayar').value = hasil.toFixed(2);
-            document.getElementById('total-bayar').value = hasil.toFixed(2);
+            // document.getElementById('total-bayar').value = hasil.toFixed(2);
             });
         }
         
@@ -273,7 +289,7 @@
             $('#diskon').val(0);
             $('#ongkir').val(0);
             $('#sub-total').val(0);
-            $('#total-bayar').val(0);
+            // $('#total-bayar').val(0);
         }
         
     });

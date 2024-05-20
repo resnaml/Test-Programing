@@ -39,7 +39,7 @@
                     <td>{{ $item['kode'] }}</td>
                     <td>{{ $item['tgl'] }}</td>
                     <td>{{ $item->customer['name'] }}</td>
-                    <td></td>
+                    <td>{{ $item->jml_qty }}</td>
                     <td>{{ $item['subtotal'] }}</td>
                     <td><input type="number" name="diskon" class="form-control" value="{{ $item['diskon'] }}"></td>
                     <td><input type="number" name="ongkir" class="form-control" value="{{ $item['ongkir'] }}"></td>
@@ -75,6 +75,12 @@
         Calucalte();
 
         function Calucalte() {
+
+            var diskon = document.getElementsByName("diskon");
+            var ongkir = document.getElementsByName("ongkir");
+            
+
+
             var sum = 0;
             var amts = document.getElementsByName("total");
 
@@ -83,16 +89,6 @@
                 sum = +(sum) + +(amt);
             }
             var subTotal = document.getElementById("grand-total").value = sum.toFixed(2);
-
-            // $(document).on('change','#sub-total', function() {
-
-            // var diskon = parseFloat($('#diskon').val()) || 0;
-            // var ongkir = parseFloat($('#ongkir').val()) || 0;
-            // var Sub = parseFloat($('#sub-total').val()) || 0;
-            // var hasil = Sub - (diskon + ongkir);
-            
-            // document.getElementById('grand-total').value = hasil.toFixed(2);
-            // });
         }
     </script>
 

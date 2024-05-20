@@ -18,6 +18,7 @@ class CreateSalesTable extends Migration
             $table->string("kode",15)->autoIncrement();
             $table->date("tgl");
             $table->foreignId("cust_id");
+            $table->integer("jml_qty");
             $table->decimal("subtotal",8,2);
             $table->decimal("diskon",8,2);
             $table->decimal("ongkir",8,2);

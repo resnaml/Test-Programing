@@ -13,6 +13,6 @@ class Sales extends Model
     }
 
     public function salesDet(){
-        return $this->belongsTo('App\SalesDet');
+        return $this->hasMany('App\SalesDet');
     }
 }

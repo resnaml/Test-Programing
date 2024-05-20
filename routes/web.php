@@ -27,7 +27,9 @@ Route::get('/', function () {
 });
 
 Route::get('/daftar-transaksi', function () {
-    $sales = Sales::all();
+    $sales = Sales::with(['salesDet','customer'])->get();
+    // $salesdt = SalesDet::where('sales_id',2)->count('qty');
+    // dd($salesdt);
     return view('transaksi',compact('sales'));
 });
 
@@ -68,6 +70,7 @@ Route::post('/transaksi', function(Request $request){
         'subtotal' => $request->sub_total,
         'diskon' => $request->diskon,
         'ongkir' => $request->ongkir,
+        'jml_qty' => $request->jml_qty,
         'total_bayar' => $request->total_bayar
     ]);
 
@@ -92,7 +95,8 @@ Route::post('/transaksi', function(Request $request){
         SalesDet::create($salesdt);
     }
     
-
+    // $sales['salesdt_id'] = $sales->id;
+    // $sales->save();
 
     DB::commit();
 

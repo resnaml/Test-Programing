@@ -9,7 +9,7 @@ class SalesDet extends Model
     protected $guarded = ['id'];
 
     public function sales(){
-        return $this->belongsTo(Sales::class,'sales_id')->withPivot(['qty'])->as('quantity');
+        return $this->belongsTo('App\Sales','sales_id');
     }
 
     public function barang(){
